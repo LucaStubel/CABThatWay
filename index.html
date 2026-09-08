@@ -1,0 +1,71 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ThatWay">
+<meta name="theme-color" content="#740F2F">
+<title>ThatWay · CAB</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="phone">
+
+  <!-- ===== SEARCH / HOME ===== -->
+  <div class="screen" id="searchScreen">
+    <div class="shead">
+      <img class="brandlogo" src="images/thatway-logo.png" alt="ThatWay">
+      <div class="cabtag"><img class="dome" src="images/dome-header.png" alt=""><span class="txt">CAB</span></div>
+    </div>
+    <div class="sh1">Where to?</div>
+    <div class="sbar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFCD00" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input id="q" placeholder="Search room or function" autocomplete="off" autocapitalize="characters">
+      <button class="sclear" id="sclear" aria-label="Clear">✕</button>
+    </div>
+    <div class="dlist" id="dlist"></div>
+  </div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <div id="navScreen" hidden>
+    <div class="hdr">
+      <img class="brandlogo" src="images/thatway-logo.png" alt="ThatWay">
+      <div class="dest"><div class="nm" id="destName"></div><div class="sub" id="destSub"></div></div>
+      <div class="floorpill" id="floorPill">Floor 1</div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="glc"></canvas>
+      <div class="scrim"></div>
+      <div class="tag">360°</div>
+      <div class="look" id="look" hidden>↔ Look around</div>
+      <div class="edge" id="edgeL"><div class="a">‹</div><div class="t">That way</div></div>
+      <div class="edge" id="edgeR"><div class="a">›</div><div class="t">That way</div></div>
+      <div class="pinA" id="pinA"><svg viewBox="0 0 24 24"><path d="M12 1.5c-4.4 0-8 3.5-8 7.9 0 5.6 8 13.1 8 13.1s8-7.5 8-13.1c0-4.4-3.6-7.9-8-7.9z" fill="#22C55E" stroke="#fff" stroke-width="1.4"/><circle cx="12" cy="9.3" r="3" fill="#fff"/></svg></div>
+      <div class="floorB" id="floorB"><div class="fbox"><span class="fic">▲</span><span class="ftxt"><b>Floor&nbsp;4</b><i>Take this elevator up</i></span></div></div>
+      <div class="card"><div class="big" id="bigTxt"></div><div class="sub" id="subTxt"></div></div>
+      <div class="load" id="load"><div class="spin"></div><div id="loadTxt">Loading 360° view…</div></div>
+    </div>
+    <div class="foot">
+      <div class="dots" id="dots"></div>
+      <div class="navrow"><button class="btn back" id="backBtn">Back</button><button class="btn" id="nextBtn">Next ›</button></div>
+    </div>
+  </div>
+
+  <!-- ===== ARRIVED ===== -->
+  <div class="done" id="done">
+    <div class="check"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div>
+    <div class="arv">You've arrived</div>
+    <h2 id="doneName"></h2>
+    <div class="dsub" id="doneSub"></div>
+    <button class="doneBtn" id="toSearch">Back to search</button>
+    <button class="doneLink" id="again">Walk it again</button>
+  </div>
+
+</div>
+<script src="three.min.js"></script>
+<script src="rooms.js"></script>
+<script src="map.js"></script>
+<script src="saved.js"></script>
+<script src="directions.js"></script>
+<script src="app.js"></script>
+</body></html>

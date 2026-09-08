@@ -1,0 +1,181 @@
+/* ============================================================
+   THATWAY · CAB — DESIGN (TAMU-SA Brand)
+   ------------------------------------------------------------
+   Farben hier in :root ändern, dann greift es überall.
+   --maroon = Hintergrund (Madla Maroon)
+   --yellow = Akzent (Yellow Rose) · Text darauf = --ink
+   Fonts: Oswald (Headlines) · Vollkorn (Text/Subheads)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Vollkorn:wght@400;500;600;700&display=swap');
+
+:root{
+  --maroon:#740F2F;        /* Madla Maroon (Basis)      */
+  --maroon-deep:#4E0A20;   /* dunkler für Tiefe          */
+  --maroon-hi:#8C1D3E;     /* heller für Flächen         */
+  --yellow:#FFCD00;        /* Yellow Rose (Akzent)       */
+  --ink:#020000;           /* Jaguar Black (Text auf Gelb)*/
+  --white:#FFFFFF;         /* Esperanza White (Fließtext)*/
+  --gray:#B1B1B1;          /* General Gray               */
+  --green:#22C55E;         /* nur Ankunfts-Haken         */
+  --line:#2F86FF;          /* Bodenlinie (funktional)    */
+  --head:'Oswald',system-ui,sans-serif;
+  --body:'Vollkorn',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;background:var(--maroon-deep)}
+body{font-family:var(--body);color:var(--white);
+  background:radial-gradient(130% 90% at 50% -10%,var(--maroon-hi),var(--maroon) 45%,var(--maroon-deep));
+  display:flex;align-items:center;justify-content:center}
+
+.phone{position:relative;width:100vw;height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column;background:transparent}
+.notch{display:none}
+
+/* ===== Focus (Tastatur) ===== */
+button:focus-visible,input:focus-visible,.drow:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+
+/* ============================================================
+   NAV-HEADER (im 360°-Screen)
+   ============================================================ */
+.hdr{position:relative;z-index:30;display:flex;align-items:center;gap:12px;
+  padding:calc(env(safe-area-inset-top,0px) + 16px) 18px 10px}
+.hdr .brandlogo{height:24px;flex:none}
+.dest{flex:1;min-width:0}
+.dest .lab{font-family:var(--head);font-weight:500;letter-spacing:.18em;font-size:9px;color:var(--yellow);text-transform:uppercase}
+.dest .nm{font-family:var(--head);font-weight:700;font-size:17px;color:var(--white);line-height:1.05;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.01em}
+.dest .sub{font-family:var(--body);font-weight:500;font-size:12px;color:rgba(255,255,255,.62);margin-top:1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.floorpill{flex:none;background:var(--yellow);border:1px solid var(--yellow);color:var(--ink);
+  font-family:var(--head);font-weight:600;font-size:11px;padding:6px 11px;border-radius:999px;white-space:nowrap;text-transform:uppercase;letter-spacing:.04em}
+
+/* ============================================================
+   360°-BÜHNE
+   ============================================================ */
+.stage{position:relative;flex:1;margin:6px 12px 0;border-radius:20px;overflow:hidden;background:#000;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);touch-action:none;cursor:grab}
+.stage:active{cursor:grabbing}
+#glc{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scrim{position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(0,0,0,.32) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 50%,rgba(0,0,0,.6) 100%)}
+.tag{position:absolute;left:12px;top:10px;z-index:8;background:rgba(0,0,0,.5);border:1px solid rgba(255,205,0,.4);
+  color:var(--yellow);font-size:9px;padding:3px 9px;border-radius:999px;letter-spacing:.03em;font-weight:600;font-family:var(--head)}
+.look{position:absolute;top:10px;right:12px;z-index:8;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.85);font-size:10px;padding:4px 10px;border-radius:999px;transition:opacity .5s;font-family:var(--body)}
+
+/* Rand-Hinweis „That way“ */
+.edge{position:absolute;top:48%;z-index:7;transform:translateY(-50%);display:none;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
+.edge.on{display:flex;animation:pulse 1.1s infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+.edge .a{font-size:36px;color:var(--yellow);line-height:1;filter:drop-shadow(0 2px 5px rgba(0,0,0,.7))}
+.edge .t{font-size:9px;color:#fff;background:rgba(0,0,0,.6);padding:2px 7px;border-radius:999px;white-space:nowrap;font-family:var(--body)}
+#edgeL{left:8px}#edgeR{right:8px}
+
+/* Aufzug-Hinweis */
+.floorB{position:absolute;z-index:6;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .2s;opacity:0}
+.fbox{display:flex;align-items:center;gap:10px;background:linear-gradient(180deg,var(--maroon-hi),var(--maroon-deep));
+  border:2px solid var(--yellow);border-radius:16px;padding:9px 15px;box-shadow:0 10px 24px rgba(0,0,0,.55);animation:bob 1.3s infinite ease-in-out}
+.fic{font-size:26px;color:var(--yellow);line-height:1;animation:upf 1.1s infinite ease-in-out}
+.ftxt{display:flex;flex-direction:column;font-family:var(--head);color:#fff;line-height:1.15}
+.ftxt b{font-size:18px;font-weight:700;color:var(--yellow);letter-spacing:.3px}
+.ftxt i{font-size:11.5px;font-style:normal;opacity:.9;font-family:var(--body)}
+@keyframes upf{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+/* Ankunfts-Pin */
+.pinA{position:absolute;z-index:6;pointer-events:none;transform:translate(-50%,-100%);transition:opacity .2s}
+.pinA svg{width:64px;height:80px;filter:drop-shadow(0 5px 8px rgba(0,0,0,.5));animation:bob 1.1s infinite ease-in-out}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+/* Info-Karte */
+.card{position:absolute;left:12px;right:12px;bottom:12px;z-index:9;background:rgba(30,6,15,.86);
+  border:1px solid rgba(255,205,0,.35);border-radius:16px;padding:13px 16px;backdrop-filter:blur(6px)}
+.card .big{font-family:var(--head);font-weight:700;font-size:20px;line-height:1.14;color:var(--white);text-transform:uppercase;letter-spacing:.01em}
+.card .sub{font-family:var(--body);font-weight:500;font-size:13.5px;color:#f3e7cf;margin-top:3px}
+
+/* Marken-Loader */
+.load{position:absolute;inset:0;z-index:12;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;
+  color:#f3e7cf;font-size:12px;font-family:var(--body);background:var(--maroon-deep);transition:opacity .3s}
+.load .spin{width:34px;height:34px;border:3px solid rgba(255,255,255,.2);border-top-color:var(--yellow);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== Fuß / Buttons ===== */
+#navScreen{display:flex;flex-direction:column;flex:1;min-height:0}
+.foot{padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 18px);z-index:30}
+.dots{display:flex;gap:5px;justify-content:center;margin-bottom:12px}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.22);transition:.25s}
+.dots i.on{background:var(--yellow);width:18px;border-radius:6px}
+.navrow{display:flex;gap:8px;max-width:640px;margin:0 auto;width:100%}
+.btn{border:0;border-radius:15px;padding:16px 0;font-family:var(--head);font-weight:700;font-size:17px;cursor:pointer;
+  transition:transform .15s ease,filter .15s ease;text-transform:uppercase;letter-spacing:.03em}
+#nextBtn{flex:1;background:var(--yellow);color:var(--ink);box-shadow:0 8px 22px rgba(255,205,0,.28)}
+#nextBtn:hover{filter:brightness(1.05)}
+.btn.back{flex:0 0 54px;width:54px;background:rgba(255,255,255,.12);color:#fff;font-size:13px;border:1px solid rgba(255,255,255,.25)}
+.btn:active{transform:scale(.98)}
+.btn.back[disabled]{opacity:.3;cursor:default}
+#nextBtn.arrive{background:var(--green);color:#04220f}
+
+/* ============================================================
+   ANKUNFT (dynamisch, Markenfarben)
+   ============================================================ */
+.done{position:absolute;inset:0;z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;
+  background:radial-gradient(120% 90% at 50% 26%,var(--maroon-hi),var(--maroon) 52%,var(--maroon-deep))}
+.done.show{display:flex}
+.check{width:96px;height:96px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 12px rgba(34,197,94,.16);margin-bottom:22px}
+.done .arv{font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px}
+.done h2{font-family:var(--head);font-weight:700;font-size:27px;line-height:1.1;text-transform:uppercase;color:#fff;max-width:16ch}
+.done .dsub{font-family:var(--body);font-weight:500;font-size:15px;color:rgba(255,255,255,.72);margin-top:8px}
+.doneBtn{margin-top:28px;background:var(--yellow);color:var(--ink);border:0;border-radius:14px;padding:15px 32px;
+  font-family:var(--head);font-weight:700;font-size:16px;cursor:pointer;text-transform:uppercase;letter-spacing:.03em}
+.doneBtn:active{transform:scale(.98)}
+.doneLink{margin-top:14px;background:none;border:0;color:rgba(255,255,255,.6);font-size:13px;cursor:pointer;text-decoration:underline;font-family:var(--body)}
+
+/* ============================================================
+   SUCH-/START-SCREEN
+   ============================================================ */
+.screen{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;
+  padding:calc(env(safe-area-inset-top,0px) + 22px) 20px calc(env(safe-area-inset-bottom,0px) + 16px);
+  background:url(images/dome-watermark.png) center 42% / min(560px,72%) auto no-repeat, var(--maroon)}
+.screen>*{width:100%;max-width:900px;margin-left:auto;margin-right:auto}
+
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:22px;position:relative}
+.shead .brandlogo{height:26px;flex:none}
+.cabtag{margin-left:auto;position:relative;display:flex;align-items:center;justify-content:flex-end}
+.cabtag .dome{position:absolute;right:-6px;top:50%;transform:translateY(-50%);height:52px;opacity:.9;pointer-events:none}
+.cabtag .txt{font-family:var(--head);font-weight:700;font-size:26px;letter-spacing:.06em;color:var(--white);position:relative}
+
+.sh1{font-family:var(--head);font-weight:700;font-size:30px;line-height:1.05;margin-bottom:16px;text-transform:uppercase;letter-spacing:.01em}
+
+.sbar{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.10);border:1px solid rgba(255,205,0,.4);
+  border-radius:14px;padding:13px 14px;margin-bottom:18px}
+.sbar input{flex:1;background:none;border:0;outline:0;color:#fff;font-family:var(--body);font-weight:500;font-size:16px}
+.sbar input::placeholder{color:rgba(255,255,255,.5)}
+.sclear{flex:none;width:24px;height:24px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;
+  font-size:14px;line-height:1;cursor:pointer;display:none}
+.sclear.show{display:block}
+
+.dlist{display:flex;flex-direction:column;gap:9px;overflow:auto;flex:1;min-height:0;width:100%;max-width:900px;padding-bottom:8px}
+.dlist::-webkit-scrollbar{width:0}
+
+.drow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:11px 13px;color:#fff;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.drow:hover{transform:translateY(-2px);border-color:rgba(255,205,0,.65);background:rgba(255,255,255,.09)}
+.drow:active{transform:scale(.99)}
+.drow .ic{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center}
+.drow .ic img{width:44px;height:44px;display:block;border-radius:12px}
+.drow .txt{display:flex;flex-direction:column;min-width:0}
+.drow .nm{font-family:var(--head);font-weight:600;font-size:16px;line-height:1.15;text-transform:uppercase;letter-spacing:.01em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.drow .fl{font-family:var(--body);font-weight:500;font-size:12.5px;color:rgba(255,255,255,.6);margin-top:2px;white-space:nowrap}
+.drow .go{margin-left:auto;color:var(--yellow);font-size:20px;padding-left:6px}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (min-width:700px){
+  .stage{margin:8px auto 0;max-width:1100px;width:calc(100% - 24px)}
+  .hdr,.foot{max-width:1100px;margin-left:auto;margin-right:auto;width:100%}
+  .card{left:auto;right:16px;width:min(480px,calc(100% - 32px))}
+  .sh1{font-size:34px}
+}
