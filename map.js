@@ -181,7 +181,7 @@ const KEEP = {
   1: ['B101','B103','B104','B105','B108','B114','B115','B116','B117','B123','B124','B128','B134','B135','B135A'],
   2: ['B201','B202','B203','B208','B209','B210','B211','B216','B217','B218','B219','B220','B221','B222','B223','B225','B226','B231','B232','B233'],
   3: ['B301','B302','B307','B310','B312','B313','B318','B319','B320','B321','B323','B324','B325','B326','B331','B332','B333','B334','B337','B338','B339','B340','B345','B347','B348','B349','B350','B351'],
-  4: ['B401','B402','B405','B409','B410','B411','B416','B417','B418','B419','B420','B421','B427','B428','B429','B434','B435','B436','B439'],
+  4: ['B401','B402','B405','B410','B411','B416','B417','B418','B419','B420','B421','B427','B428','B429','B434','B435','B436','B439'],
 };
 
 /* Räume Floor 1 -> nächster Wegpunkt (Ziel). Ankunft zeigt das Flur-Foto. */
@@ -215,7 +215,7 @@ const ROOMS = [
   { id:'B106A', wp:'f1-game-e' },
   { id:'B107', wp:'f1-game-e' },
   { id:'B107A', wp:'f1-game-e' },
-  { id:'B108', wp:'f1-elev-e2', label:'Office' },
+  { id:'B108', wp:'f1-elev-e2', label:'Food Pantry / Career Clothing' },
   { id:'B108A', wp:'f1-elev-e2' },
   { id:'B109', wp:'f1-elev-e2' },
   { id:'B110', wp:'f1-elev-e2' },
@@ -225,7 +225,7 @@ const ROOMS = [
   { id:'B113', wp:'f1-elev-e2' },
   { id:'B114', wp:'f1-elev-e2', label:'Restroom' },
   { id:'B115', wp:'f1-elev-e2', label:'Restroom' },
-  { id:'B116', wp:'f1-elev-e3', label:'Mail and Receiving Department' },
+  { id:'B116', wp:'f1-elev-e3', label:'Mail and Parking Department' },
   { id:'B116A', wp:'f1-elev-e3' },
   { id:'B116B', wp:'f1-elev-e3' },
   { id:'B117', wp:'f1-elev-e3', label:'Office of Facilities / Construction' },
