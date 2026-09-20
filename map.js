@@ -656,7 +656,7 @@ const ROOMS = [
    ============================================================ */
 const LABELS = {
   "B101": "CAB Lobby",
-  "B103": "Student Lounge",
+  "B103": "Student Life",
   "B104": "Faculty Offices",
   "B105": "Student Lounge / Recreational Sports",
   "B108": "Office",
@@ -735,6 +735,5 @@ const LABELS = {
   "B429": "Restroom",
   "B434": "Operations, Environmental Health and Safety",
   "B435": "Office of the Provost",
-  "B436": "Office of the Provost",
   "B439": "Human Resources (HR)",
 };
