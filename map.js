@@ -179,7 +179,7 @@ const EDGES = [
    ============================================================ */
 const KEEP = {
   1: ['B101','B103','B104','B105','B108','B114','B115','B116','B117','B123','B124','B128','B134','B135','B135A'],
-  2: ['B201','B202','B203','B208','B209','B210','B211','B216','B217','B218','B219','B220','B221','B222','B223','B225','B226','B231','B232','B233'],
+  2: ['B201','B202','B203','B208','B209','B210','B216','B217','B218','B219','B220','B221','B222','B223','B225','B226','B231','B232','B233'],
   3: ['B301','B302','B307','B310','B312','B313','B318','B319','B320','B321','B323','B324','B325','B326','B331','B332','B333','B334','B337','B338','B339','B340','B345','B347','B348','B349','B350','B351'],
   4: ['B401','B402','B405','B410','B411','B416','B417','B418','B419','B420','B421','B427','B428','B429','B434','B435','B439'],
 };
@@ -262,7 +262,7 @@ const ROOMS = [
   { id:'B133B', wp:'f1-dining-w' },
   { id:'B133C', wp:'f1-dining-w' },
   { id:'B133D', wp:'f1-dining-w' },
-  { id:'B134', wp:'f1-dining-w', label:'Student Lounge' },
+  { id:'B134', wp:'f1-dining-w', label:'Dining Hall' },
   { id:'B135', wp:'f1-lobby-e1', label:'Student Lounge' },
   { id:'B135A', wp:'f1-corr-w', label:'TAMUSA Kiosk' },
   { id:'B135B', wp:'f1-corr-w' },
@@ -328,7 +328,6 @@ const ROOMS = [
   { id:'B210K', wp:'f2-clep-e' },
   { id:'B210L', wp:'f2-clep-e' },
   { id:'B210M', wp:'f2-clep-e' },
-  { id:'B211', wp:'f2-hall-e1', label:'Disability Support Services' },
   { id:'B211A', wp:'f2-clep-e' },
   { id:'B211B', wp:'f2-clep-e' },
   { id:'B211C', wp:'f2-hall-e1' },
@@ -666,7 +665,7 @@ const LABELS = {
   "B123": "Restroom",
   "B124": "Restroom",
   "B128": "Family Restroom",
-  "B134": "Student Lounge",
+  "B134": "Dining Hall",
   "B135": "Student Lounge",
   "B135A": "TAMUSA Kiosk",
   "B201": "Lobby",
@@ -675,7 +674,6 @@ const LABELS = {
   "B208": "Writing, Language and Digital Composing Center",
   "B209": "Testing Center",
   "B210": "Disability Support Services",
-  "B211": "Disability Support Services",
   "B216": "Restroom",
   "B217": "Restroom",
   "B218": "Classroom",

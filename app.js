@@ -205,7 +205,7 @@ function disp(id){ return String(id).replace(/^B/i,''); }
 
 /* ---------- Räume ---------- */
 const LIVE={}; ROOMS.forEach(r=>LIVE[r.id]=r);
-const EXTRA=[ { id:'DINING', label:'Dining Hall', wp:'f1-dining-w', floor:1, extra:true } ];
+const EXTRA=[];
 EXTRA.forEach(e=>{ LIVE[e.id]=e; });
 function roomFloorNum(id){ const r=LIVE[id]; if(r&&r.floor) return r.floor; const m=String(id).match(/(\d)/); return m?+m[1]:0; }
 const KEEPSET={}; if(typeof KEEP!=='undefined'){ Object.keys(KEEP).forEach(f=>{ KEEPSET[f]=new Set(KEEP[f]); }); }

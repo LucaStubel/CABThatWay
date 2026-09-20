@@ -29,7 +29,6 @@ const DIRECTIONS = {
   "B208": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
   "B209": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
   "B210": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
-  "B211": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
   "B216": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
   "B217": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
   "B218": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
@@ -89,5 +88,4 @@ const DIRECTIONS = {
   "B434": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
   "B435": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
   "B439": ["Head down the corridor","Almost there","Take the elevator to Floor 4",""],
-  "DINING": ["Head down the corridor","Keep going","Keep going","Almost there",""],
 };
