@@ -49,6 +49,7 @@
         <button id="eStepAdd" title="Add step (choose photo)">S＋</button>
         <button id="eStepDel" title="Delete step">S－</button>
         <button id="eGoal" title="Toggle destination step (🎯)">🎯</button>
+        <button id="eTxt" title="Set instruction text">✎</button>
         <span class="ebsep"></span>
         <button id="eAdd" title="Add line point">＋</button>
         <button id="eDel" title="Delete last line point">－</button>
@@ -61,6 +62,7 @@
       </div>
       <div class="ebhint" id="ebhint" hidden>Drag the points on the floor · “＋” then tap the floor · Green = start</div>
       <div class="expModal" id="expModal" hidden><div class="expBox"><b>Route saved ✓</b><div style="font-size:12px;color:#cbb">Saved on this device. Copy it and send it to bake into saved.js.</div><textarea id="expTxt" readonly></textarea><div class="expbtns"><button id="expCopy">Copy</button><button id="expClose">Close</button></div></div></div>
+      <div class="pickModal" id="txtModal" hidden><div class="pickBox"><div class="pickHead"><b>Instruction for this step</b><button id="txtClose">✕</button></div><div id="txtGrid" style="display:flex;flex-wrap:wrap;gap:8px;padding:12px"></div></div></div>
       <div class="pickModal" id="picker" hidden><div class="pickBox"><div class="pickHead"><b id="pickTitle">Choose a photo</b><button id="pickClose">✕</button></div><div class="pickGrid" id="pickGrid"></div></div></div>
     </div>
     <div class="foot">

@@ -55,8 +55,11 @@ function nodeFromOvrStep(s){ const wp=WAYPOINTS[s.wp]||{}; return { key:s.key, i
 
 /* ---------- Weg-Anweisungen (directions.js) überschreiben den Text je Schritt ---------- */
 const DIR=(typeof DIRECTIONS!=='undefined')?DIRECTIONS:{};
+const _DEFBIG=['','follow the line','der linie folgen'];
 function applyDirections(room,nodes){ const d=room&&DIR[room.id]; if(!d) return nodes;
-  nodes.forEach((n,idx)=>{ if(!n.arrive && typeof d[idx]==='string' && d[idx].trim()) n.big=d[idx]; }); return nodes; }
+  nodes.forEach((n,idx)=>{ if(n.arrive) return;
+    if(_DEFBIG.indexOf((n.big||'').trim().toLowerCase())<0) return; /* vom Editor gesetzter Text gewinnt */
+    if(typeof d[idx]==='string' && d[idx].trim()) n.big=d[idx]; }); return nodes; }
 
 function stepsFor(room,path){ const ov=OVR[room.id]; let nodes;
   if(ov&&ov.steps&&ov.steps.length) nodes=ov.steps.map(nodeFromOvrStep);
@@ -155,7 +158,7 @@ function animate(){
  pathTex.offset.y=(pathTex.offset.y-0.012+1)%1;
  HOOK.frame();
  const w=stage.clientWidth,h=stage.clientHeight;
- const fb=$('#floorB'); fb.style.opacity=n.elevSym?1:0; fb.style.pointerEvents=n.elevSym?'auto':'none'; fb.style.cursor='pointer'; if(n.elevSym){ fb.style.left=(w/2)+'px'; fb.style.top=(h*0.42)+'px'; fb.querySelector('b').textContent=(n.floor||'').replace(/.*→\s*/,'Floor '); }
+ const fb=$('#floorB'); fb.style.opacity=n.elevSym?1:0; fb.style.pointerEvents=n.elevSym?'auto':'none'; fb.style.cursor='pointer'; if(n.elevSym){ fb.style.left=(w/2)+'px'; fb.style.top=(h*0.42)+'px'; var _ef=(n.big||'').match(/Floor\s*(\d+)/); fb.querySelector('b').textContent=_ef?('Floor '+_ef[1]):(n.floor||''); }
  const pn=$('#pinA'); pn.style.opacity=n.arrive?1:0; if(n.arrive){ pn.style.left=(w/2)+'px'; pn.style.top=(h*0.62)+'px'; }
  const L=$('#edgeL'),R=$('#edgeR'); const inView=Math.abs(d)<hHalf*1.1;
  if(n.elevSym||n.arrive||inView){ L.classList.remove('on'); R.classList.remove('on'); }

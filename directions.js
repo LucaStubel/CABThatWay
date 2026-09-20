@@ -1,177 +1,93 @@
 /* ============================================================
-   THATWAY · CAB — WEG-ANWEISUNGEN (hier bearbeitbar)
+   THATWAY · CAB — WEG-ANWEISUNGEN (auto: kontextuell)
    ------------------------------------------------------------
-   Pro Raum: eine Liste mit einem Text je Schritt (in Reihenfolge).
-   Aendere z.B. "Follow the line" in "Turn left", "Turn right",
-   "Go straight", "Continue to the end of the hall" usw.
+   Pro Raum: ein Text je Schritt (in Reihenfolge).
    "Take the elevator to Floor X" = Aufzug-Schritt (nicht loeschen).
    Letzter Eintrag "" = Ankunft (wird ignoriert).
+   Du kannst einzelne Texte jederzeit von Hand ueberschreiben,
+   z.B. mit einer Landmarke: "Left at the directory".
    ============================================================ */
 const DIRECTIONS = {
-  /* 101 — CAB Lobby */
   "B101": [""],
-  /* 103 — Student Lounge */
-  "B103": ["Follow the line", ""],
-  /* 104 — Faculty Offices */
-  "B104": ["Follow the line", "Follow the line", "Follow the line", ""],
-  /* 105 — Student Lounge / Recreational Sports */
-  "B105": ["Follow the line", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 108 — Office */
-  "B108": ["Follow the line", "Follow the line", "Follow the line", ""],
-  /* 114 — Restroom */
-  "B114": ["Follow the line", "Follow the line", ""],
-  /* 115 — Restroom */
-  "B115": ["Follow the line", "Follow the line", ""],
-  /* 116 — Mail and Receiving Department */
-  "B116": ["Follow the line", "Follow the line", ""],
-  /* 117 — Office of Facilities / Construction */
-  "B117": ["Follow the line", "Follow the line", ""],
-  /* 123 — Restroom */
-  "B123": ["Follow the line", "Follow the line", ""],
-  /* 124 — Restroom */
-  "B124": ["Follow the line", "Follow the line", ""],
-  /* 128 — Family Restroom */
-  "B128": ["Follow the line", "Follow the line", ""],
-  /* 134 — Student Lounge */
-  "B134": ["Follow the line", "Follow the line", "Follow the line", ""],
-  /* 135 — Student Commuter Lounge */
-  "B135": ["Follow the line", ""],
-  /* 135A — TAMUSA Kiosk */
-  "B135A": ["Follow the line", "Follow the line", ""],
-  /* 201 — Lobby */
-  "B201": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 202 — Academic Advising */
-  "B202": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 203 — Faculty Offices */
-  "B203": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", ""],
-  /* 208 — Writing, Language and Digital Composing Center */
-  "B208": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 209 — Testing Center */
-  "B209": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 210 — Disability Support Services */
-  "B210": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 211 — Disability Support Services */
-  "B211": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 216 — Restroom */
-  "B216": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", ""],
-  /* 217 — Restroom */
-  "B217": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", ""],
-  /* 218 — Classroom */
-  "B218": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", ""],
-  /* 219 — Classroom */
-  "B219": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", ""],
-  /* 220 — Conference Room */
-  "B220": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", ""],
-  /* 221 — Academic Coaching Office */
-  "B221": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", ""],
-  /* 222 — Academic Coaching */
-  "B222": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 223 — Classroom */
-  "B223": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", ""],
-  /* 225 — Restroom */
-  "B225": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", ""],
-  /* 226 — Restroom */
-  "B226": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", ""],
-  /* 231 — ITS Business */
-  "B231": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 232 — Web Dev Team */
-  "B232": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 233 — Information Technology Services */
-  "B233": ["Follow the line", "Follow the line", "Take the elevator to Floor 2", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 301 — Lobby */
-  "B301": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 302 — Biology Lab / Molecular Biology Lab */
-  "B302": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", ""],
-  /* 307 — Chemistry Lab */
-  "B307": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 310 — Biology Lab */
-  "B310": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", ""],
-  /* 312 — Faculty Office */
-  "B312": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", ""],
-  /* 313 — History and Philosophy Faculty Office */
-  "B313": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 318 — Faculty Offices */
-  "B318": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 319 — Faculty Office */
-  "B319": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 320 — Jaguar Student Media / Newsroom */
-  "B320": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 321 — Faculty Office */
-  "B321": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 323 — Faculty Office */
-  "B323": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 324 — Faculty Office */
-  "B324": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 325 — Faculty Office */
-  "B325": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 326 — Faculty Office */
-  "B326": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 331 — Restroom */
-  "B331": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 332 — Restroom */
-  "B332": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 333 — Classroom */
-  "B333": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 334 — Classroom */
-  "B334": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 337 — Classroom */
-  "B337": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 338 — Classroom */
-  "B338": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 339 — Restroom */
-  "B339": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 340 — Restroom */
-  "B340": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 345 — Early College and Academic Partnership Department */
-  "B345": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 347 — Department of Sociology and Communication */
-  "B347": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 348 — Faculty Office */
-  "B348": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 349 — Faculty Office */
-  "B349": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 350 — Sociology Office */
-  "B350": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", "Follow the line", ""],
-  /* 351 — Public Health Office */
-  "B351": ["Follow the line", "Follow the line", "Take the elevator to Floor 3", "Follow the line", ""],
-  /* 401 — Lobby, Fourth Floor */
-  "B401": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", ""],
-  /* 402 — Vista Room */
-  "B402": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", ""],
-  /* 405 — University Advancement */
-  "B405": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", ""],
-  /* 409 — Office of the President */
-  "B409": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 410 — Office of the President */
-  "B410": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 411 — Marketing and Strategic Communications Office */
-  "B411": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", "Follow the line", ""],
-  /* 416 — Restroom */
-  "B416": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", ""],
-  /* 417 — Restroom */
-  "B417": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", ""],
-  /* 418 — Office of Business Affairs */
-  "B418": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", ""],
-  /* 419 — Conference Room, Finance and Administration */
-  "B419": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", ""],
-  /* 420 — Finance and Administration Break Room */
-  "B420": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", ""],
-  /* 421 — Amanda Office */
-  "B421": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", ""],
-  /* 427 — Office of the Vice President of Research */
-  "B427": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", ""],
-  /* 428 — Restroom */
-  "B428": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", ""],
-  /* 429 — Restroom */
-  "B429": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", ""],
-  /* 434 — Operations, Environmental Health and Safety */
-  "B434": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", ""],
-  /* 435 — Office of the Provost */
-  "B435": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", ""],
-  /* 436 — Office of the Provost */
-  "B436": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", "Follow the line", "Follow the line", ""],
-  /* 439 — Human Resources (HR) */
-  "B439": ["Follow the line", "Follow the line", "Take the elevator to Floor 4", ""],
-  /* DINING — Dining Hall */
-  "DINING": ["Follow the line", "Follow the line", "Follow the line", "Follow the line", ""],
+  "B103": ["Head down the corridor",""],
+  "B104": ["Head down the corridor","Keep going","Almost there",""],
+  "B105": ["Head down the corridor","Keep going","Keep going","Almost there",""],
+  "B108": ["Head down the corridor","Keep going","Almost there",""],
+  "B114": ["Head down the corridor","Almost there",""],
+  "B115": ["Head down the corridor","Almost there",""],
+  "B116": ["Head down the corridor","Almost there",""],
+  "B117": ["Head down the corridor","Almost there",""],
+  "B123": ["Head down the corridor","Almost there",""],
+  "B124": ["Head down the corridor","Almost there",""],
+  "B128": ["Head down the corridor","Almost there",""],
+  "B134": ["Head down the corridor","Keep going","Almost there",""],
+  "B135": ["Head down the corridor",""],
+  "B135A": ["Head down the corridor","Almost there",""],
+  "B201": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B202": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B203": ["Head down the corridor","Almost there","Take the elevator to Floor 2",""],
+  "B208": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B209": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B210": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B211": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B216": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
+  "B217": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
+  "B218": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
+  "B219": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going",""],
+  "B220": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going",""],
+  "B221": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
+  "B222": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B223": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going",""],
+  "B225": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
+  "B226": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Almost there",""],
+  "B231": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B232": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B233": ["Head down the corridor","Keep going","Take the elevator to Floor 2","Step out and keep going","Keep going","Almost there",""],
+  "B301": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B302": ["Head down the corridor","Almost there","Take the elevator to Floor 3",""],
+  "B307": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B310": ["Head down the corridor","Almost there","Take the elevator to Floor 3",""],
+  "B312": ["Head down the corridor","Almost there","Take the elevator to Floor 3",""],
+  "B313": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B318": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B319": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B320": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Keep going","Almost there",""],
+  "B321": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Keep going","Almost there",""],
+  "B323": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B324": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B325": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B326": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B331": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B332": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B333": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B334": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B337": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B338": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B339": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B340": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B345": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B347": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Keep going","Almost there",""],
+  "B348": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Keep going","Almost there",""],
+  "B349": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B350": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going","Almost there",""],
+  "B351": ["Head down the corridor","Keep going","Take the elevator to Floor 3","Step out and keep going",""],
+  "B401": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going",""],
+  "B402": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
+  "B405": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going",""],
+  "B409": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Keep going","Almost there",""],
+  "B410": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Keep going","Almost there",""],
+  "B411": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Keep going","Almost there",""],
+  "B416": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
+  "B417": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
+  "B418": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
+  "B419": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
+  "B420": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going",""],
+  "B421": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going",""],
+  "B427": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going",""],
+  "B428": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going",""],
+  "B429": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going",""],
+  "B434": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
+  "B435": ["Head down the corridor","Keep going","Take the elevator to Floor 4","Step out and keep going","Almost there",""],
+  "B439": ["Head down the corridor","Almost there","Take the elevator to Floor 4",""],
+  "DINING": ["Head down the corridor","Keep going","Keep going","Almost there",""],
 };

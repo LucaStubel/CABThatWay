@@ -94,4 +94,14 @@ $('#eAuto').onclick=()=>{ if(!APP.currentRoom||!OV[APP.currentRoom.id])return; i
 $('#eExp').onclick=()=>{ savePaths(); saveViews(); saveOvr(); $('#expTxt').value=JSON.stringify({lines:EP,views:EV,routes:OV}); $('#expModal').hidden=false; };
 $('#expCopy').onclick=()=>{ const t=$('#expTxt'); t.select(); try{document.execCommand('copy');}catch(e){} if(navigator.clipboard) navigator.clipboard.writeText(t.value).catch(()=>{}); $('#expCopy').textContent='Copied ✓'; setTimeout(()=>$('#expCopy').textContent='Copy',1200); };
 $('#expClose').onclick=()=>{ $('#expModal').hidden=true; };
+
+/* ---- Preset-Anweisungstexte (klicken statt tippen) ---- */
+const PRESETS=['Turn left','Turn right','Go straight','Continue','Bear left','Bear right','Step out and turn left','Step out and turn right','Almost there','Follow the line'];
+function openTxt(){ if(!cur())return; const g=$('#txtGrid'); g.innerHTML=''; const cb=(cur().big||'');
+  PRESETS.forEach(t=>{ const c=document.createElement('button'); c.textContent=t;
+    c.style.cssText='padding:10px 14px;border-radius:10px;border:1px solid #8c1d3e;background:'+(t===cb?'#FFCD00':'#2a0a14')+';color:'+(t===cb?'#4E0A20':'#fff')+';font-size:14px;font-weight:600;cursor:pointer';
+    c.onclick=()=>{ $('#txtModal').hidden=true; const ov=ensureOvr(); ov.steps[APP.i].big=t; saveOvr(); APP.rebuildRoute(APP.i); }; g.appendChild(c); });
+  $('#txtModal').hidden=false; }
+{ const b=$('#eTxt'); if(b) b.onclick=openTxt; const c=$('#txtClose'); if(c) c.onclick=()=>{ $('#txtModal').hidden=true; }; }
+
 })();
